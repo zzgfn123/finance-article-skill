@@ -1,6 +1,18 @@
-# loan-article-skill
+# finance-article-skill
 
 > 贷款文章生成器 · 可复用于任何 AI agent
+
+## 预览
+
+> 截图占位。生成一张 1280×640 的展示图(选 1 张):
+>
+> - 选项 A — 终端截图:跑 `python3 scripts/validate_article.py --file evals/smoke-test-article.md --city 北京 --topic 房产二抵` 的输出
+> - 选项 B — 文章段落截图:从 `evals/smoke-test-article.md` 截 1 段
+> - 选项 C — 自定义 PNG(建议 1280×640,深色背景 + 等宽字体)
+>
+> 放好后替换下面这一行:
+>
+> `![preview](docs/preview.png)`
 
 ## 简介
 

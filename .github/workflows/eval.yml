@@ -1,0 +1,33 @@
+name: evals
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  binary-checks:
+    name: Binary checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run evals
+        run: python3 scripts/run_evals.py
+
+      - name: Validate skill spec
+        run: |
+          # Lightweight frontmatter / structure check
+          test -f SKILL.md
+          head -1 SKILL.md | grep -q "^---"
+          test -f AGENTS.md
+          test -f README.md
+          test -f LICENSE
+          echo "OK: spec files present"
