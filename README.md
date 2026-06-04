@@ -91,7 +91,7 @@ loan-article-skill/
 ├── README.md                # 本文件
 ├── install.sh               # 跨平台安装脚本
 ├── references/
-│   ├── company-profile.md   # 聚融网公司档案(可替换)
+│   ├── company-profile.md   # 公司档案(可替换)
 │   ├── writing-data.md      # 利率/额度/审批数据
 │   ├── city-profiles.md     # 32 城画像与受众痛点
 │   └── triggers.md          # 触发词与意图识别
