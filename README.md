@@ -1,6 +1,6 @@
 # loan-article-skill
 
-> 聚融网贷款文章生成器 · 可复用于任何 AI agent
+> 贷款文章生成器 · 可复用于任何 AI agent
 
 ## 简介
 
