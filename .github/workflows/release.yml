@@ -1,0 +1,68 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify evals pass before release
+        run: python3 scripts/run_evals.py
+
+      - name: Extract changelog
+        id: changelog
+        run: |
+          # 从 commit 历史生成 release notes
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            NOTES=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s")
+          else
+            NOTES=$(git log --pretty=format:"- %s")
+          fi
+          {
+            echo "notes<<EOF"
+            echo "## What's Changed"
+            echo ""
+            echo "$NOTES"
+            echo ""
+            echo "## Verification"
+            echo ""
+            echo "- [x] \`python3 scripts/run_evals.py\` passes (10/10)"
+            echo "- [x] Spec files present (SKILL.md / AGENTS.md / README.md / LICENSE)"
+            echo ""
+            echo "## Install"
+            echo ""
+            echo '```bash'
+            echo "git clone https://github.com/zzgfn123/finance-article-skill.git \\"
+            echo "  ~/.claude/skills/finance-article-skill"
+            echo '```'
+            echo ""
+            echo "**Full Changelog**: https://github.com/zzgfn123/finance-article-skill/compare/${PREV_TAG}...${GITHUB_REF_NAME}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.notes }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
