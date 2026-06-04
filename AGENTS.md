@@ -6,8 +6,10 @@
 ## Purpose
 
 Generate 1800-2500 word SEO articles for a Chinese loan-consulting platform
-(currently configured for **聚融网 / jurong.cn**), targeted at city-specific
-audiences (一线 vs 二线 vs 其他), on topics like:
+(brand-agnostic — `references/company-profile.md` holds the brand profile;
+the [BRAND_NAME] placeholder in code/docs is to be replaced by the actual
+brand name), targeted at city-specific audiences (一线 vs 二线 vs 其他), on
+topics like:
 
 - 房产抵押贷款 / 房产二次抵押
 - 企业经营贷 / 开票贷 / 纳税贷

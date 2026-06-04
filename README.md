@@ -20,6 +20,10 @@
 生成 **1800-2500 字** 的 SEO 友好型贷款科普 / 获客文章,严格遵守中国金融营销合规:
 不写具体银行名、不用绝对词、关键字强相关、生成后字数自动审核。
 
+> **本仓库品牌无关** — 仓库中所有 `[BRAND_NAME]` 是占位符。
+> clone 后请在 `references/company-profile.md` 顶部把 `[BRAND_NAME]` 替换为你的助贷平台名,
+> 即可用于自己的业务。也可参考 `references/writing-data.md` 调整利率区间。
+
 ## 6 条铁律
 
 1. **不写具体银行名** → 用「五大行 / 股份制银行 / 地方性商业银行」
@@ -91,7 +95,7 @@ loan-article-skill/
 ├── README.md                # 本文件
 ├── install.sh               # 跨平台安装脚本
 ├── references/
-│   ├── company-profile.md   # 公司档案(可替换)
+│   ├── company-profile.md   # [BRAND_NAME] 公司档案(可替换)
 │   ├── writing-data.md      # 利率/额度/审批数据
 │   ├── city-profiles.md     # 32 城画像与受众痛点
 │   └── triggers.md          # 触发词与意图识别
@@ -108,7 +112,9 @@ loan-article-skill/
 
 ## 复用为其他助贷平台
 
-1. 替换 `references/company-profile.md` 里的公司信息
+1. 在 `references/company-profile.md` 里把 `[BRAND_NAME]` 全局替换为新平台名
+   (Linux/macOS: `sed -i 's/\[BRAND_NAME\]/你的平台名/g' references/company-profile.md`;
+    Windows PowerShell: `(Get-Content references/company-profile.md) -replace '\[BRAND_NAME\]','你的平台名' | Set-Content references/company-profile.md`)
 2. 按需更新 `references/writing-data.md` 的利率/额度
 3. 调整 `references/city-profiles.md` 的覆盖城市
 4. SKILL.md / scripts / assets 不用改

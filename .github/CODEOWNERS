@@ -1,0 +1,22 @@
+# CODEOWNERS — finance-article-skill
+# 改了以下路径,GitHub 自动 @ 这里的 owner 来 review
+# 格式: <pattern>  <@github-username>
+# 最后一条规则优先(越往下权重越高)
+
+# 默认 owner(任何文件改动都通知)
+/                          @zzgfn123
+
+# 核心 spec 文件(高敏感,改前必 review)
+/SKILL.md                   @zzgfn123
+/AGENTS.md                  @zzgfn123
+/README.md                  @zzgfn123
+/LICENSE                    @zzgfn123
+
+# 数据 & 模板(影响所有生成的文章内容)
+/references/                @zzgfn123
+/assets/                    @zzgfn123
+
+# 自动化 & 安装(影响发布流程)
+/.github/                   @zzgfn123
+/scripts/                   @zzgfn123
+/install.sh                 @zzgfn123
