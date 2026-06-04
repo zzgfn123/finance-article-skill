@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Editor backup
+*.bak
+*.tmp
+*.orig
+
+# 评测临时产物
+evals/tmp/
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Secrets / env
+.env
+.env.local
+*.pem
+*.key
