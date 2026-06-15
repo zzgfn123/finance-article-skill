@@ -75,6 +75,11 @@ BINARY_CHECKS = [
         "description": "6 段式骨架在 assets",
         "command": "grep -q '6 段' assets/article-template.md",
     },
+    {
+        "id": "BC-11",
+        "description": "含 references/model-config.md 且 SKILL.md 含写作模型确认",
+        "command": "[ -f references/model-config.md ] && grep -q '写作模型确认' SKILL.md",
+    },
 ]
 
 

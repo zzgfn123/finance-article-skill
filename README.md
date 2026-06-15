@@ -98,6 +98,7 @@ loan-article-skill/
 │   ├── company-profile.md   # [BRAND_NAME] 公司档案(可替换)
 │   ├── writing-data.md      # 利率/额度/审批数据
 │   ├── city-profiles.md     # 32 城画像与受众痛点
+│   ├── model-config.md      # 写作模型配置(模型名 + 切换指令占位,可替换)
 │   └── triggers.md          # 触发词与意图识别
 ├── assets/
 │   ├── title-patterns.md    # 5 大角度标题模板
@@ -117,7 +118,10 @@ loan-article-skill/
     Windows PowerShell: `(Get-Content references/company-profile.md) -replace '\[BRAND_NAME\]','你的平台名' | Set-Content references/company-profile.md`)
 2. 按需更新 `references/writing-data.md` 的利率/额度
 3. 调整 `references/city-profiles.md` 的覆盖城市
-4. SKILL.md / scripts / assets 不用改
+4. (可选)配置 `references/model-config.md`:把 `[WRITING_MODEL]` 替换为写作用的模型名,
+   `[MODEL_SWITCH_COMMAND]` 替换为当前平台的切换指令。配置后,文章写作前会提示是否切换到该模型,
+   写完后提示切回;不配置则用当前模型写作(首次会给一次配置提示,可跳过)
+5. SKILL.md / scripts / assets 不用改
 
 ## 跑评估
 

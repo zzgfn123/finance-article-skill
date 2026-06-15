@@ -27,6 +27,7 @@
 | BC-08 | validate_article.py 可执行 | `python3 scripts/validate_article.py --help 2>&1 \| grep -q "city"` |
 | BC-09 | 触发词出现在 SKILL.md | `grep -q "帮我写贷款文章" SKILL.md` |
 | BC-10 | 6 段式骨架在 assets | `grep -q "6 段" assets/article-template.md` |
+| BC-11 | 含 references/model-config.md 且 SKILL.md 含写作模型确认 | `[ -f references/model-config.md ] && grep -q "写作模型确认" SKILL.md` |
 
 ## 3. Golden Cases(input-only,pending-first-green)
 

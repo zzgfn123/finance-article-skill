@@ -34,8 +34,9 @@ quick-pick menu (city list in `references/city-profiles.md`, topics in
 1. `references/company-profile.md` — current company profile (replaceable)
 2. `references/writing-data.md` — rate/LTV rules by city tier
 3. `references/city-profiles.md` — 32-city audience profiles
-4. `assets/title-patterns.md` — 5-angle title patterns
-5. `assets/article-template.md` — 6-section article skeleton
+4. `references/model-config.md` — writing model config (model name + switch command placeholders)
+5. `assets/title-patterns.md` — 5-angle title patterns
+6. `assets/article-template.md` — 6-section article skeleton
 
 ## Hard Constraints (any violation = rewrite)
 
@@ -53,13 +54,31 @@ quick-pick menu (city list in `references/city-profiles.md`, topics in
 
 1. Parse input → ask for missing city/topic with quick-pick menus.
 2. If no title provided → generate 5 title candidates across 5 angles, ask user to pick.
-3. For each of N articles (N=5 default, or user-specified):
+3. **Writing-model confirmation (run once before the writing loop):**
+   - Read `references/model-config.md`.
+   - **Not configured** (still contains `[WRITING_MODEL]` or `[MODEL_SWITCH_COMMAND]`
+     placeholder): output a first-time setup hint (replace both placeholders in
+     `model-config.md`, then reply "已配置"), and offer a "skip, keep current model"
+     option. Do **not** start writing until the user responds.
+   - **Configured**: output "Switch to `[WRITING_MODEL]` for writing? 1) switch —
+     please run `[MODEL_SWITCH_COMMAND]` and reply '已切换'; 2) keep current model."
+     Do **not** start writing until the user responds.
+   - The model switch is executed by the user in their current platform; the skill only
+     emits the explicit instruction and waits for confirmation. Skipping or declining
+     never blocks the flow. Remember whether a switch happened in this invocation.
+4. For each of N articles (N=5 default, or user-specified):
    a. Build 6-section outline using `assets/article-template.md`.
    b. Write 1820-2500 Chinese characters following the skeleton.
    c. Run `python3 scripts/count_words.py` → must be in [1800, 2500].
    d. Run `python3 scripts/validate_article.py --file <path> --city <X> --topic <Y>` → all 8 checks must pass.
    e. If any check fails → rewrite that section (max 3 rounds), then escalate to user.
-4. Deliver as a single markdown bundle with per-article metadata header.
+   The whole writing loop + validation/rewrite (steps 4a–4e) runs under whichever model
+   was selected in step 3; do not switch again mid-loop.
+5. **Before output:** if a model switch happened in step 3, emit a switch-back prompt
+   ("All articles done. Please switch back to the model you used before writing.").
+   The skill does not record the original model name, so it can only prompt the user to
+   switch back manually.
+6. Deliver as a single markdown bundle with per-article metadata header.
 
 ## Output Format
 
