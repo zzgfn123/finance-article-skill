@@ -24,6 +24,7 @@ jobs:
           python-version: "3.11"
 
       - name: Verify evals pass before release
+        id: evals
         run: python3 scripts/run_evals.py
 
       - name: Extract changelog
@@ -36,6 +37,7 @@ jobs:
           else
             NOTES=$(git log --pretty=format:"- %s")
           fi
+          EVAL_COUNT=$(grep -c '"id": "BC-' scripts/run_evals.py || echo 0)
           {
             echo "notes<<EOF"
             echo "## What's Changed"
@@ -44,7 +46,7 @@ jobs:
             echo ""
             echo "## Verification"
             echo ""
-            echo "- [x] \`python3 scripts/run_evals.py\` passes (10/10)"
+            echo "- [x] \`python3 scripts/run_evals.py\` passes (${EVAL_COUNT}/${EVAL_COUNT})"
             echo "- [x] Spec files present (SKILL.md / AGENTS.md / README.md / LICENSE)"
             echo ""
             echo "## Install"

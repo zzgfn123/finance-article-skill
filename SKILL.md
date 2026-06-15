@@ -12,7 +12,7 @@ description: >-
 license: MIT
 metadata:
   author: [BRAND_NAME] 内容团队
-  version: 1.0.0
+  version: 1.1.0
   created: 2026-06-01
   last_reviewed: 2026-06-15
   review_interval_days: 90
